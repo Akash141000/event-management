@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-depl
+spec:
+  selector:
+    matchLabels:
+      app: expiration
+  template:
+    metadata:
+      labels:
+        app: expiration
+    spec:
+      containers:
+        - name: expiration
+          image: event-management/expiration
+          env:
+            - name: DATABASE_HOST
+              value: expiration-db-srv
+            - name: EVENTBUS_URI
+              value: amqp://rabbitmq-srv:5672
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: expiration-srv
+spec:
+  selector:
+    app: expiration
+  ports:
+    - port: 3003
+      targetPort: 3000

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+spec:
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: event-management/auth
+          env:
+            - name: DATABASE_NAME
+              value: auth
+            - name: DATABASE_HOST
+              value: auth-db-srv
+            - name: JWT_SECRET
+              value: secret
+            - name: DATABASE_PASSWORD
+              value: postgresSecret
+            - name: DATABASE_USER
+              value: postgresUser
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-srv
+spec:
+  selector:
+    app: auth
+  ports:
+    - port: 3000
+      targetPort: 3000

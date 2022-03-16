@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-depl
+spec:
+  selector:
+    matchLabels:
+      app: payments
+  template:
+    metadata:
+      labels:
+        app: payments
+    spec:
+      containers:
+        - name: payments
+          image: event-management/payments
+          env:
+            - name: EVENTBUS_URI
+              value: amqp://rabbitmq-srv:5672
+            - name: DATABASE_NAME
+              value: payments
+            - name: DATABASE_HOST
+              value: payments-db-srv
+            - name: JWT_SECRET
+              value: secret
+            - name: DATABASE_PASSWORD
+              value: postgresSecret
+            - name: DATABASE_USER
+              value: postgresUser
+            - name: STRIPE_KEY
+              value: sk_test_51JMRtpSGur93abb0CBu2LsAmRkRDtbBr3jn86rbA8W71slCWsPGZvkyvcKDopz1F00333Xb9AlqX9twY5DTto48r00ZTwgCRbK
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payments-srv
+spec:
+  selector:
+    app: payments
+  ports:
+    - port: 3004
+      targetPort: 3000

@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-depl
+spec:
+  selector:
+    matchLabels:
+      app: orders
+  template:
+    metadata:
+      labels:
+        app: orders
+    spec:
+      containers:
+        - name: orders
+          image: event-management/orders
+          env:
+            - name: EVENTBUS_URI
+              value: amqp://rabbitmq-srv:5672
+            - name: DATABASE_NAME
+              value: orders
+            - name: DATABASE_HOST
+              value: orders-db-srv
+            - name: JWT_SECRET
+              value: secret
+            - name: DATABASE_PASSWORD
+              value: postgresSecret
+            - name: DATABASE_USER
+              value: postgresUser
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-srv
+spec:
+  selector:
+    app: orders
+  ports:
+    - port: 3005
+      targetPort: 3000

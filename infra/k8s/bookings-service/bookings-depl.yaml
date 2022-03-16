@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bookings-depl
+spec:
+  selector:
+    matchLabels:
+      app: bookings
+  template:
+    metadata:
+      labels:
+        app: bookings
+    spec:
+      containers:
+        - name: bookings
+          image: event-management/bookings
+          env:
+            - name: MONGO_URI
+              value: mongodb://bookings-db-srv:27017/Bookings
+            - name: EVENTBUS_URI
+              value: amqp://rabbitmq-srv:5672
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bookings-srv
+spec:
+  selector:
+    app: bookings
+  ports:
+    - port: 3001
+      targetPort: 3000

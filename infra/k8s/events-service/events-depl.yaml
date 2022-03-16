@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: events-depl
+spec:
+  selector:
+    matchLabels:
+      app: events
+  template:
+    metadata:
+      labels:
+        app: events
+    spec:
+      containers:
+        - name: events
+          image: event-management/events
+          env:
+            - name: MONGO_URI
+              value: mongodb://events-db-srv:27018/events
+            - name: EVENTBUS_URI
+              value: amqp://rabbitmq-srv:5672
+          
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: events-srv
+spec:
+  selector:
+    app: events
+  ports:
+    - port: 3002
+      targetPort: 3000

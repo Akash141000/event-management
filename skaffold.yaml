@@ -1,0 +1,97 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+metadata:
+  name: event-management
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/**/*.yaml
+      # - infra/k8s/other/*.yaml
+      # - infra/k8s/auth-service/*.yaml
+      # - infra/k8s/bookings-service/*.yaml
+      # - infra/k8s/events-service/*.yaml
+      # - infra/k8s/expiration-service/*.yaml
+      # - infra/k8s/orders-service/*.yaml
+      # - infra/k8s/payments-service/*.yaml
+      # - infra/k8s/streaming-service/*.yaml
+build:
+  local:
+    push: false
+  artifacts:
+    - image: event-management/auth
+      context: auth-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        # infer:
+        #   - '**/*/ts'
+        #   - '*.json'
+        manual:
+          - src: "src/**/*.ts"
+            dest: src
+    - image: event-management/bookings
+      context: bookings-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        # infer:
+        #   - '**/*/ts'
+        #   - '*.json'
+        manual:
+          - src: "src/**/*.ts"
+            dest: src
+    - image: event-management/events
+      context: events-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        # infer:
+        #   - '**/*/ts'
+        #   - '*.json'
+        manual:
+          - src: "src/**/*.ts"
+            dest: src
+    - image: event-management/expiration
+      context: expiration-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        # infer:
+        #   - '**/*/ts'
+        #   - '*.json'
+        manual:
+          - src: "src/**/*.ts"
+            dest: src
+    - image: event-management/payments
+      context: payments-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        # infer:
+        #   - '**/*/ts'
+        #   - '*.json'
+        manual:
+          - src: "src/**/*.ts"
+            dest: src
+    - image: event-management/orders
+      context: orders-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        # infer:
+        #   - '**/*/ts'
+        #   - '*.json'
+        manual:
+          - src: "src/**/*.ts"
+            dest: src
+    - image: event-management/streaming
+      context: streaming-service
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        # infer:
+        #   - '**/*/ts'
+        #   - '*.json'
+        manual:
+          - src: "src/**/*.ts"
+            dest: src

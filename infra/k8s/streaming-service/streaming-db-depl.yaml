@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streaming-db-depl
+spec:
+  selector:
+    matchLabels:
+      app: streaming-db
+  template:
+    metadata:
+      labels:
+        app: streaming-db
+    spec:
+      containers:
+        - name: streaming-db
+          image: mongo
+          ports:
+            - containerPort: 27017
+          
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: streaming-db-srv
+spec:
+  selector:
+    app: streaming-db
+  ports:
+    - port: 27019
+      targetPort: 27017
+      protocol: TCP

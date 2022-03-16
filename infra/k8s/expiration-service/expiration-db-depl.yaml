@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-db-depl
+spec:
+  selector:
+    matchLabels:
+      app: expiration-db
+  template:
+    metadata:
+      labels:
+        app: expiration-db
+    spec:
+      containers:
+      - name: expiration-db
+        image: redis
+        ports:
+        - containerPort: 6379
+          name: redis-port
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: expiration-db-srv
+spec:
+  selector:
+    app: expiration-db
+  ports:
+    - port: 6379
+      targetPort: 6379
+      protocol: TCP
+
+
