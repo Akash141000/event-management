@@ -21,13 +21,15 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      - name: Change Directory
-        run: cd terraform
 
       # Runs a single command using the runners shell
       - name: Setup Terraform
@@ -88,13 +90,13 @@ jobs:
               repo: context.repo.repo,
               body: output
             })
+
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
         
       - name: Terraform Apply
-        if: github.event_name == 'push'
         run: terraform apply -auto-approve
         env:
           TF_VAR_serviceprinciple_id: ${{secrets.SERVICE_PRINCIPLE_ID}}
