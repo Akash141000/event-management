@@ -22,3 +22,7 @@ variable "location" {
 variable "ssh_key" {
 
 }
+
+variable "storage_key" {
+    
+}

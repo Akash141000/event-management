@@ -1,3 +1,20 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+     }
+  }
+
+  backend "azurerm" {
+    container_name = "event-group-blob"
+    resource_group_name = "event_management"
+    storage_account_name = "storageblobaz"
+    key = var.storage_key
+  }
+}
+
+
+
 provider "azurerm" {
   client_id = var.serviceprinciple_id
   client_secret = var.serviceprinciple_key
