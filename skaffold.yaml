@@ -6,14 +6,6 @@ deploy:
   kubectl:
     manifests:
       - ./infra/k8s/**/*.yaml
-      # - infra/k8s/other/*.yaml
-      # - infra/k8s/auth-service/*.yaml
-      # - infra/k8s/bookings-service/*.yaml
-      # - infra/k8s/events-service/*.yaml
-      # - infra/k8s/expiration-service/*.yaml
-      # - infra/k8s/orders-service/*.yaml
-      # - infra/k8s/payments-service/*.yaml
-      # - infra/k8s/streaming-service/*.yaml
 build:
   local:
     push: false
@@ -23,9 +15,6 @@ build:
       docker:
         dockerfile: Dockerfile
       sync:
-        # infer:
-        #   - '**/*/ts'
-        #   - '*.json'
         manual:
           - src: "src/**/*.ts"
             dest: src
@@ -34,9 +23,6 @@ build:
       docker:
         dockerfile: Dockerfile
       sync:
-        # infer:
-        #   - '**/*/ts'
-        #   - '*.json'
         manual:
           - src: "src/**/*.ts"
             dest: src
@@ -45,9 +31,6 @@ build:
       docker:
         dockerfile: Dockerfile
       sync:
-        # infer:
-        #   - '**/*/ts'
-        #   - '*.json'
         manual:
           - src: "src/**/*.ts"
             dest: src
@@ -56,9 +39,6 @@ build:
       docker:
         dockerfile: Dockerfile
       sync:
-        # infer:
-        #   - '**/*/ts'
-        #   - '*.json'
         manual:
           - src: "src/**/*.ts"
             dest: src
@@ -67,9 +47,6 @@ build:
       docker:
         dockerfile: Dockerfile
       sync:
-        # infer:
-        #   - '**/*/ts'
-        #   - '*.json'
         manual:
           - src: "src/**/*.ts"
             dest: src
@@ -78,9 +55,6 @@ build:
       docker:
         dockerfile: Dockerfile
       sync:
-        # infer:
-        #   - '**/*/ts'
-        #   - '*.json'
         manual:
           - src: "src/**/*.ts"
             dest: src
@@ -89,9 +63,6 @@ build:
       docker:
         dockerfile: Dockerfile
       sync:
-        # infer:
-        #   - '**/*/ts'
-        #   - '*.json'
         manual:
           - src: "src/**/*.ts"
             dest: src
