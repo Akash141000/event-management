@@ -9,7 +9,7 @@ terraform {
     container_name = "event-group-blob"
     resource_group_name = "event_management"
     storage_account_name = "storageblobaz"
-    key = var.storage_key
+    key = "terraform.tfstate"
   }
 }
 
