@@ -24,6 +24,7 @@ jobs:
     defaults:
       run:
         working-directory: ./terraform
+        shell: bash
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -45,6 +46,8 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
+        env:
+          ARM_ACCESS_KEY: ${{secrets.STORAGE_KEY}}
        
       - name: Terraform Validate
         id: validate
@@ -54,7 +57,6 @@ jobs:
         id: plan
         run: terraform plan
         env:
-          ARM_ACCESS_KEY: ${{secrets.STORAGE_KEY}}
           TF_VAR_serviceprinciple_id: ${{secrets.SERVICE_PRINCIPLE_ID}}
           TF_VAR_serviceprinciple_key: ${{secrets.SERVICE_PRINCIPLE_KEY}}
           TF_VAR_ssh_key: ${{secrets.SSH_KEY}}
