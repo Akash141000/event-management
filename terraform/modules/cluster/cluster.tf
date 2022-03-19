@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "az_resource_group" {
-    name = "event_management_group"
+    name = "event_management"
     location = var.location
 }
 
