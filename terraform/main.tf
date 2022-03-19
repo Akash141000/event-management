@@ -10,7 +10,6 @@ terraform {
     resource_group_name = "event_management"
     storage_account_name = "storageblobaz"
     key = "terraform.tfstate"
-    access_key = var.storage_key
   }
 }
 
