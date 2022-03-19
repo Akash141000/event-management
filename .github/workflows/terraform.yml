@@ -54,12 +54,12 @@ jobs:
         id: plan
         run: terraform plan
         env:
+          ARM_ACCESS_KEY: ${{secrets.STORAGE_KEY}}
           TF_VAR_serviceprinciple_id: ${{secrets.SERVICE_PRINCIPLE_ID}}
           TF_VAR_serviceprinciple_key: ${{secrets.SERVICE_PRINCIPLE_KEY}}
           TF_VAR_ssh_key: ${{secrets.SSH_KEY}}
           TF_VAR_tenant_id: ${{secrets.TENANT_ID}}
           TF_VAR_subscription_id: ${{secrets.SUBSCRIPTION_ID}}
-          TF_VAR_storage_key: ${{secrets.STORAGE_KEY}}
         continue-on-error: true
         
       - name: Update Pull Request
