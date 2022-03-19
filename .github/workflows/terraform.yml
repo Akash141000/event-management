@@ -51,6 +51,12 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: terraform plan
+        env:
+          TF_VAR_serviceprinciple_id: ${{secrets.SERVICE_PRINCIPLE_ID}}
+          TF_VAR_serviceprinciple_key: ${{secrets.SERVICE_PRINCIPLE_KEY}}
+          TF_VAR_ssh_key: ${{secrets.SSH_KEY}}
+          TF_VAR_tenant_id: ${{secrets.TENANT_ID}}
+          TF_VAR_subscription_id: ${{secrets.SUBSCRIPTION_ID}}
         continue-on-error: true
         
       - name: Update Pull Request
@@ -85,6 +91,7 @@ jobs:
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
+
         
       - name: Terraform Apply
         if: github.event_name == 'push'
