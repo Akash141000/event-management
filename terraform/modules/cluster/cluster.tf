@@ -1,23 +1,23 @@
-resource "azurerm_resource_group" "event_management_group" {
+resource "azurerm_resource_group" "az_resource_group" {
     name = "event_management_group"
     location = var.location
 }
 
 
 
-resource "azurerm_container_registry" "event_management_registry" {
+resource "azurerm_container_registry" "az_container_registry" {
     name = "eventmanagementregistry"
-    resource_group_name = azurerm_resource_group.event_management_group.name
-    location = azurerm_resource_group.event_management_group.location
+    resource_group_name = azurerm_resource_group.az_resource_group.name
+    location = azurerm_resource_group.az_resource_group.location
     sku = "Standard"
     admin_enabled = false
 }
 
 
-resource "azurerm_kubernetes_cluster" "event_management_cluster" {
+resource "azurerm_kubernetes_cluster" "az_kubernetes_cluster" {
     name = "eventmanagementcluster"
-    location = azurerm_resource_group.event_management_group.location
-    resource_group_name = azurerm_resource_group.event_management_group.name
+    resource_group_name = azurerm_resource_group.az_resource_group.name
+    location = azurerm_resource_group.az_resource_group.location
     dns_prefix = "event-management-azure"
 
     service_principal {
