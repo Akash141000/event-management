@@ -21,8 +21,8 @@ resource "azurerm_kubernetes_cluster" "az_kubernetes_cluster" {
     dns_prefix = "event-management-azure"
 
     service_principal {
-      client_id = var.serviceprinciple_id
-      client_secret = var.serviceprinciple_key
+      # client_id = var.serviceprinciple_id
+      # client_secret = var.serviceprinciple_key
     }
 
   
@@ -75,5 +75,5 @@ resource "azurerm_kubernetes_cluster" "az_kubernetes_cluster" {
 resource "azurerm_role_assignment" "AcrPull" {
   scope                = azurerm_container_registry.az_container_registry.id
   role_definition_name = "AcrPull"
-  principal_id         = var.serviceprinciple_id
+  # principal_id         = var.serviceprinciple_id
 }

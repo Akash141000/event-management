@@ -1,19 +1,19 @@
-variable "serviceprinciple_id" {
+# variable "serviceprinciple_id" {
   
-}
+# }
 
-variable "serviceprinciple_key" {
+# variable "serviceprinciple_key" {
   
-}
+# }
 
 
-variable "subscription_id" {
+# variable "subscription_id" {
   
-}
+# }
 
-variable "tenant_id" {
+# variable "tenant_id" {
   
-}
+# }
 
 variable "location" {
     default = "australiaeast"
