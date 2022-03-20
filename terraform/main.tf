@@ -15,11 +15,11 @@ terraform {
 
 
 
-provider "azurerm" {
-  client_id = var.serviceprinciple_id
-  client_secret = var.serviceprinciple_key
-  subscription_id = var.subscription_id
-  tenant_id = var.tenant_id
+provider "azurerm" { 
+  # client_id = var.serviceprinciple_id
+  # client_secret = var.serviceprinciple_key
+  # subscription_id = var.subscription_id
+  # tenant_id = var.tenant_id
   features {
     
   }
