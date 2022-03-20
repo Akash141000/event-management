@@ -20,6 +20,12 @@ jobs:
     name: 'Terraform'
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    env:
+      ARM_ACCESS_KEY: ${{secrets.STORAGE_KEY}}
+      ARM_CLIENT_ID: ${{secrets.SERVICE_PRINCIPLE_ID}}
+      ARM_CLIENT_SECRET: ${{secrets.SERVICE_PRINCIPLE_KEY}}
+      ARM_TENANT_ID: ${{secrets.TENANT_ID}}
+      ARM_SUBSCRIPTION_ID: ${{secrets.SUBSCRIPTION_ID}}
 
     defaults:
       run:
@@ -46,12 +52,7 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
-        env:
-          ARM_ACCESS_KEY: ${{secrets.STORAGE_KEY}}
-          ARM_CLIENT_ID: ${{secrets.SERVICE_PRINCIPLE_ID}}
-          ARM_CLIENT_SECRET: ${{secrets.SERVICE_PRINCIPLE_KEY}}
-          ARM_TENANT_ID: ${{secrets.TENANT_ID}}
-          ARM_SUBSCRIPTION_ID: ${{secrets.SUBSCRIPTION_ID}}
+          
        
       - name: Terraform Validate
         id: validate
@@ -62,11 +63,6 @@ jobs:
         if: github.event_name == 'pull_request'
         run: terraform plan
         env:
-          ARM_ACCESS_KEY: ${{secrets.STORAGE_KEY}}
-          ARM_CLIENT_ID: ${{secrets.SERVICE_PRINCIPLE_ID}}
-          ARM_CLIENT_SECRET: ${{secrets.SERVICE_PRINCIPLE_KEY}}
-          ARM_TENANT_ID: ${{secrets.TENANT_ID}}
-          ARM_SUBSCRIPTION_ID: ${{secrets.SUBSCRIPTION_ID}}
           TF_VAR_serviceprinciple_id: ${{secrets.SERVICE_PRINCIPLE_ID}}
           TF_VAR_serviceprinciple_key: ${{secrets.SERVICE_PRINCIPLE_KEY}}
           TF_VAR_ssh_key: ${{secrets.SSH_KEY}}
