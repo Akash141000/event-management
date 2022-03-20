@@ -61,7 +61,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
-        run: terraform plan
+        run: terraform plan -lock=false
         env:
           TF_VAR_serviceprinciple_id: ${{secrets.SERVICE_PRINCIPLE_ID}}
           TF_VAR_serviceprinciple_key: ${{secrets.SERVICE_PRINCIPLE_KEY}}
@@ -106,7 +106,7 @@ jobs:
 
         
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply -auto-approve -lock=false
 
 
 
