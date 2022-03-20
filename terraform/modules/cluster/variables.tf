@@ -1,10 +1,10 @@
-# variable "serviceprinciple_id" {
+variable "serviceprinciple_id" {
   
-# }
+}
 
-# variable "serviceprinciple_key" {
+variable "serviceprinciple_key" {
   
-# }
+}
 
 variable "location" {
 

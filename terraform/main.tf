@@ -28,8 +28,8 @@ provider "azurerm" {
 
 module "cluster" {
   source = "./modules/cluster/"
-  # serviceprinciple_id = var.serviceprinciple_id
-  # serviceprinciple_key = var.serviceprinciple_key
+  serviceprinciple_id = var.serviceprinciple_id
+  serviceprinciple_key = var.serviceprinciple_key
   location = var.location
   ssh_key = var.ssh_key
 }

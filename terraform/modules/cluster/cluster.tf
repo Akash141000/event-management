@@ -20,10 +20,10 @@ resource "azurerm_kubernetes_cluster" "az_kubernetes_cluster" {
     location = azurerm_resource_group.az_resource_group.location
     dns_prefix = "event-management-azure"
 
-    # service_principal {
-    #   # client_id = var.serviceprinciple_id
-    #   # client_secret = var.serviceprinciple_key
-    # }
+    service_principal {
+      client_id = var.serviceprinciple_id
+      client_secret = var.serviceprinciple_key
+    }
 
   
     default_node_pool {
