@@ -55,6 +55,7 @@ jobs:
       
       - name: Terraform Plan
         id: plan
+        if: github.event_name = 'pull_request'
         run: terraform plan
         env:
           ARM_ACCESS_KEY: ${{secrets.STORAGE_KEY}}
