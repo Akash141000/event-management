@@ -6,9 +6,9 @@ terraform {
   }
 
   backend "azurerm" {
-    container_name = "event-group-blob"
+    container_name = "tfstate"
     resource_group_name = "event_management"
-    storage_account_name = "storageblobaz"
+    storage_account_name = "azeventblob"
     key = "terraform.tfstate"
   }
 }
