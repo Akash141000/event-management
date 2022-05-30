@@ -7,13 +7,13 @@ variable "serviceprinciple_key" {
 }
 
 
-# variable "subscription_id" {
+variable "subscription_id" {
   
-# }
+}
 
-# variable "tenant_id" {
+variable "tenant_id" {
   
-# }
+}
 
 variable "location" {
     default = "australiaeast"
@@ -21,8 +21,4 @@ variable "location" {
 
 variable "ssh_key" {
 
-}
-
-variable "storage_key" {
-    
 }

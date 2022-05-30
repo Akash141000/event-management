@@ -3,8 +3,6 @@ resource "azurerm_resource_group" "az_resource_group" {
     location = var.location
 }
 
-
-
 resource "azurerm_container_registry" "az_container_registry" {
     name = "eventmanagementregistry"
     resource_group_name = azurerm_resource_group.az_resource_group.name
@@ -75,5 +73,5 @@ resource "azurerm_kubernetes_cluster" "az_kubernetes_cluster" {
 resource "azurerm_role_assignment" "AcrPull" {
   scope                = azurerm_container_registry.az_container_registry.id
   role_definition_name = "AcrPull"
-  principal_id         = var.serviceprinciple_id
+  principal_id         = azurerm_kubernetes_cluster.az_kubernetes_cluster.id
 }

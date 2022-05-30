@@ -11,9 +11,7 @@ export class AppController {
   createEvent(@Req() req: Request) {
     return this.streamingService
       .create(req.get('Authorization'))
-      .subscribe((result) => {
-        console.log('result', result);
-      });
+      
   }
 
  
