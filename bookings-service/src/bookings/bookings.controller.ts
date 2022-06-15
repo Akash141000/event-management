@@ -1,10 +1,12 @@
-import { BadRequestException, Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Param, Post,UseGuards } from '@nestjs/common';
 import { BookingsService } from './bookings.service';
 import {AmqpConnection} from "@golevelup/nestjs-rabbitmq";
 import { BOOKINGS_EXCHANGE, PROCESSING_TICKETS_Q_PATTERN } from 'src/util/constaints';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { AddTicketsDto } from './dto/bookings.dto';
+import { JwtAuthGuard } from '../auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth('access-token')
 @Controller("/api/bookings")
 export class BookingsController {

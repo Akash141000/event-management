@@ -16,7 +16,7 @@ spec:
           image: event-management/streaming
           env:
             - name: MONGO_URI
-              value: mongodb://streaming-db-srv:27017/Streaming
+              value: mongodb://streaming-db-srv:27019/Streaming
             - name: EVENTBUS_URI
               value: amqp://rabbitmq-srv:5672
 

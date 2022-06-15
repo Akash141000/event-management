@@ -4,6 +4,7 @@ import {
   InternalServerErrorException,
   OnModuleInit,
   Post,
+  UseGuards
 } from '@nestjs/common';
 import { PaymentService } from '../payments/payment.service';
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
@@ -13,8 +14,9 @@ import {
 } from 'src/util/constaints';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { CreateChargeDto } from './dto/payment.dto';
+import {JwtAuthGuard} from "../auth.guard"
 
-
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth('access-token')
 @Controller("/api/payments")
 export class PaymentController implements OnModuleInit {

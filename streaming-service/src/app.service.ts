@@ -37,7 +37,7 @@ const client = Client.initWithMiddleware({
 
 @Injectable()
 export class AppService {
-  constructor(private http: HttpService) { }
+  constructor() { }
 
   async create(token: string) {
     const onlineMeetings = {

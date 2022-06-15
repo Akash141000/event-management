@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Post,UseGuards } from '@nestjs/common';
 import { EVENT_TYPE } from './event.modal';
 import { EventService } from './event.service';
 import {AmqpConnection} from "@golevelup/nestjs-rabbitmq";
@@ -6,7 +6,9 @@ import { EVENTS_EXCHANGE, NEW_EVENT_Q_PATTERN } from '../util/constaints';
 import { ITiming } from '../util/types';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { AddEventDto } from './dto/events.dto';
+import { JwtAuthGuard } from '../auth.guard';
 
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth('access-token')
 @Controller("/api/events")
 export class EventController {

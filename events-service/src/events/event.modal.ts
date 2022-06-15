@@ -48,6 +48,9 @@ export class Event extends Document{
     @Prop()
     eventType:EVENT_TYPE
 
+    @Prop({require:false})
+    eventLink:String
+
     @Prop()
     amount:number
 

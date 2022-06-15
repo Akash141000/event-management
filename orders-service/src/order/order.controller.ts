@@ -1,10 +1,13 @@
 import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post,UseGuards } from '@nestjs/common';
 import { ORDERS_EXCHANGE, ORDERS_GENERATED_Q_PATTERN } from 'src/util/constaints';
 import { OrderService } from './order.service';
 import {CreateOrderDto} from "./dto/order.dto";
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth.guard';
 
+
+@UseGuards(JwtAuthGuard)
 @ApiBearerAuth('access-token')
 @Controller("/api/orders")
 export class OrderController {
